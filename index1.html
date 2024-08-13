@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+       
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            display: block;
+            width: 80%;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: 15px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        /* Navigation buttons */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>FOOD GALLERY</h1>
+    </nav>
+    
+    <div class="gallery">
+        <div class="image-container">
+            <img src="https://c0.wallpaperflare.com/preview/177/685/219/pizza-supreme-cheese-food.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://www.shutterstock.com/image-photo/dahi-bhalla-called-vada-bhalle-600nw-2264547813.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://static.toiimg.com/thumb/61050397.cms?width=1200&height=900" >
+        </div>
+        <div class="image-container">
+            <img src="https://b.zmtcdn.com/data/pictures/chains/6/18398396/677a0ca0466075bcbcfa74adb4e72066.png?fit=around|960:500&crop=960:500;*,*" >
+        </div>
+        <div class="image-container">
+            <img src="https://b.zmtcdn.com/data/reviews_photos/bdb/ceda68cdad8240aad14c683294dd3bdb_1557569710.jpg?fit=around|960:500&crop=960:500;*,*" >
+        </div>
+        <div class="image-container">
+            <img src="https://b.zmtcdn.com/data/pictures/8/19134408/ad10dc09f45fef62fd1e81ea439c71fc.jpg?fit=around|960:500&crop=960:500;*,*">
+        </div>
+        <div class="image-container">
+            <img src="https://i.ytimg.com/vi/w8dDtaN389M/maxresdefault.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://t3.ftcdn.net/jpg/06/16/85/60/360_F_616856040_zCvPMQkPFOWsVb3Hxo7mQUYzlzciFCZs.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://i.ytimg.com/vi/OzWObZWrnDA/maxresdefault.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://www.shutterstock.com/image-photo/selective-focus-famous-bengali-dish-600nw-2226199841.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://i.ytimg.com/vi/0WnHrQWr4xk/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAFI0dBjMrglkdVEtn0D7zynjyIog" >
+        </div>
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpmi7uSRaHWXw2_s4AwXb2S8n_kE5nDFM5fA&s" >
+        </div>
+        <!-- Add more images as needed -->
+    </div>
+
+    <!-- Modal for large image view -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+
+        <!-- Navigation buttons -->
+        <span class="nav-button prev">&#10094;</span>
+        <span class="nav-button next">&#10095;</span>
+    </div>
+
+    <script>
+        var modal = document.getElementById('modal');
+        var images = document.querySelectorAll('.image-container img');
+        var modalImg = document.getElementById('modal-img');
+        var captionText = document.getElementById('caption');
+        var currentIndex = 0;
+
+        function openModal(index) {
+            modal.style.display = 'flex';
+            modalImg.src = images[index].src;
+            captionText.innerHTML = images[index].alt;
+            currentIndex = index;
+        }
+
+        images.forEach(function(image, index) {
+            image.onclick = function() {
+                openModal(index);
+            };
+        });
+
+        var closeModal = document.getElementsByClassName('close')[0];
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        document.querySelector('.prev').onclick = function() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            openModal(currentIndex);
+        };
+
+        document.querySelector('.next').onclick = function() {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            openModal(currentIndex);
+        };
+    </script>
+</body>
+</html>

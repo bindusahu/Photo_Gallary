@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 0;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: 15px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .next, .back {
+            position: absolute;
+            top: 50%;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transform: translateY(-50%);
+            z-index: 1001;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .back {
+            left: 20px;
+        }
+
+        .next:hover, .back:hover {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1> BIRDS GALLERY</h1>
+    </nav>
+    
+    <div class="gallery">
+        <div class="image-container">
+            <img src="https://advancecricket.com/image/team-icon/trent-rockets-women-64073326.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://t3.ftcdn.net/jpg/05/63/70/98/360_F_563709848_OdMVkfRpOZbSsy6bFBkthhJzleFxM7Cn.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://i.natgeofe.com/k/520e971d-7a22-4a6f-90dc-258df74e45bc/american-goldfinch.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/036/042/741/small/ai-generated-cute-little-bird-with-a-nature-background-ai-generated-photo.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://images.indianexpress.com/2023/07/birdspr.jpg?resize=600,334">
+        </div>
+        <div class="image-container">
+            <img src="https://t4.ftcdn.net/jpg/05/65/36/03/360_F_565360370_LrWWCTxczrmwqpsPYPljiFyE4gFqpecr.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/a/m/AmericanGoldfinch_MattWilliams_4000x2200.jpg?crop=0%2C0%2C4000%2C2200&wid=4000&hei=2200&scl=1.0" >
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/previews/034/365/201/non_2x/wallpaper-bird-the-sun-flowers-spring-the-bird-the-bird-the-bird-ai-generated-free-photo.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://png.pngtree.com/background/20230425/original/pngtree-cute-bird-with-purple-head-sits-on-branch-pink-flowers-ai-picture-image_2477710.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwv1H-6GsGc2bzwuPBV_PNm9FpiL0VXsXkBg&s" >
+        </div>
+        <div class="image-container">
+            <img src="https://t3.ftcdn.net/jpg/08/37/55/42/360_F_837554264_byhvuDih1ZfwklNrYuwqXc1wHjLz93aF.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://png.pngtree.com/background/20230503/original/pngtree-cute-bird-standing-on-the-grass-picture-image_2500167.jpg" >
+        </div>
+        <!-- Add more images as needed -->
+    </div>
+
+    <!-- Modal for large image view -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+        <div class="back">&larr;</div>
+        <div class="next">&rarr;</div>
+    </div>
+
+    <script>
+        var modal = document.getElementById('modal');
+        var images = document.querySelectorAll('.image-container img');
+        var modalImg = document.getElementById('modal-img');
+        var captionText = document.getElementById('caption');
+        var currentIndex = 0;
+
+        images.forEach(function(image, index) {
+            image.onclick = function() {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+                currentIndex = index;
+            };
+        });
+
+        var span = document.getElementsByClassName('close')[0];
+        span.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        var nextButton = document.getElementsByClassName('next')[0];
+        nextButton.onclick = function() {
+            currentIndex = (currentIndex + 1) % images.length;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+
+        var backButton = document.getElementsByClassName('back')[0];
+        backButton.onclick = function() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+    </script>
+</body>
+</html>

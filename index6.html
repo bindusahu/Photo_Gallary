@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav h1 {
+            margin: 0;
+        }
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 0;
+            padding-bottom: 75%;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: 10px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        /* Navigation buttons */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            nav h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-button {
+                font-size: 30px;
+                padding: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-button {
+                font-size: 20px;
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <h1>BUTTERFLY GALLERY</h1>
+    </nav>
+
+    <div class="gallery">
+        <div class="image-container">
+            <img src="https://st3.depositphotos.com/2627021/19071/i/450/depositphotos_190713858-stock-photo-fairy-blue-butterflies-water.jpg">
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/024/496/914/small_2x/butterfly-background-wallpaper-ai-generated-free-photo.jpg">
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/039/589/777/small_2x/ai-generated-a-vibrant-butterfly-flying-in-nature-illuminated-by-summer-beauty-generated-by-ai-photo.jpg">
+        </div>
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVSHkQuCU0HoBjyo0vJvja4OMWdQH9Er-lhCK43NfkwaVVIO5wYm8QX_cDr7_yb1t7ZUo&usqp=CAU">
+        </div>
+        <div class="image-container">
+            <img src="https://stylecaster.com/wp-content/uploads/2023/11/zodiacsignsasbutterflies.png?w=600&h=337&crop=1">
+        </div>
+        <div class="image-container">
+            <img src="https://qph.cf2.quoracdn.net/main-qimg-412028dd4e8b07ee0a57072bee695cf9">
+        </div>
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmpNHg7LstE9AbOFLavdVlJhaMWGobSIl8fS9kX_9AfHYi4WuFcLt9GB30zIcj12LdB50&usqp=CAU">
+        </div>
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXpK8qOjeIl1GwmbTnXQlsPbrAAcH2c7ktFYJskVICcUpMiWGL3C_sifIV5R1BvbAwnAY&usqp=CAU">
+        </div>
+        <div class="image-container">
+            <img src="https://indianews.in/wp-content/uploads/2024/01/354798-india-35-butterfly-species-are-in-danger-of-existence-3.webp">
+        </div>
+        <div class="image-container">
+            <img src="https://qph.cf2.quoracdn.net/main-qimg-c0134b4afcb301821b2eb0fb8fbc7aa2-lq">
+        </div>
+        <div class="image-container">
+            <img src="https://images.haryanaekhabar.com/wp-content/uploads/2021/09/Titli-Butterfly.jpg">
+        </div>
+        <div class="image-container">
+            <img src="https://images.pexels.com/photos/3087596/pexels-photo-3087596.jpeg?cs=srgb&dl=pexels-rishimanu89-3087596.jpg&fm=jpgg">
+        </div>
+        <!-- Add more images as needed -->
+    </div>
+
+    <!-- Modal for large image view -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+
+        <!-- Navigation buttons -->
+        <span class="nav-button prev">&#10094;</span>
+        <span class="nav-button next">&#10095;</span>
+    </div>
+
+    <script>
+        var modal = document.getElementById('modal');
+        var images = document.querySelectorAll('.image-container img');
+        var modalImg = document.getElementById('modal-img');
+        var captionText = document.getElementById('caption');
+        var currentIndex = 0;
+
+        function openModal(index) {
+            modal.style.display = 'block';
+            modalImg.src = images[index].src;
+            captionText.innerHTML = images[index].alt;
+            currentIndex = index;
+        }
+
+        images.forEach(function(image, index) {
+            image.onclick = function () {
+                openModal(index);
+            };
+        });
+
+        var closeModal = document.getElementsByClassName('close')[0];
+        closeModal.onclick = function () {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        document.querySelector('.prev').onclick = function () {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            openModal(currentIndex);
+        };
+
+        document.querySelector('.next').onclick = function () {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            openModal(currentIndex);
+        };
+    </script>
+</body>
+
+</html>

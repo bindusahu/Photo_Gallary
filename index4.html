@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            display: block;
+            width: 80%;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: 15px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.3s;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>OCEAN GALLERY</h1>
+    </nav>
+    
+    <div class="gallery">
+        <div class="image-container">
+            <img src="https://t4.ftcdn.net/jpg/01/87/47/59/360_F_187475954_KuDIRQZbGTwwyMTXZeRmojQH9YeSjrWt.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://www.shutterstock.com/image-photo/calm-weather-on-sea-ocean-600nw-2212935531.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://burst.shopifycdn.com/photos/ocean-waves-crashing.jpg?width=1000&format=pjpg&exif=0&iptc=0" >
+        </div>
+        <div class="image-container">
+            <img src="https://i.ytimg.com/vi/dqhVmYn4HF0/maxresdefault.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://i.insider.com/60dccb4ea08b100012b4198c?width=600&format=jpeg&auto=webp" >
+        </div>
+        <div class="image-container">
+            <img src="https://www.shutterstock.com/image-photo/majestic-humpback-whale-swimming-gracefully-260nw-2305277791.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://t3.ftcdn.net/jpg/05/71/26/62/360_F_571266253_7HuXAuQKNPOEaFt44faa37kLl8rccQq7.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://img.freepik.com/premium-photo/ocean-underwater_392261-31.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTozgbWP72D0H--YtMvGC_zLo31e6VVJecxl3Tw2DTpGpcJhL1lwZezg1aunPlA37DnWnw&usqp=CAU" >
+        </div>
+        <div class="image-container">
+            <img src="https://img.freepik.com/free-vector/sea-wallpaper_52683-44905.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://t3.ftcdn.net/jpg/08/77/27/74/360_F_877277482_Xtrjt3xhSzHrBmnKKPfnMJOxvP3njSWk.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/previews/045/789/113/non_2x/blue-ocean-with-white-sand-underwater-in-hawaii-transparent-sea-water-and-sandy-bottom-photo.jpg" >
+        </div>
+    </div>
+
+    <!-- Modal for large image view -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+        <a class="prev">&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('modal');
+
+        // Get the image and insert it inside the modal
+        var images = document.querySelectorAll('.image-container img');
+        var modalImg = document.getElementById('modal-img');
+        var captionText = document.getElementById('caption');
+        var currentIndex = 0;
+
+        images.forEach(function(image, index) {
+            image.onclick = function() {
+                currentIndex = index;
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            };
+        });
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('close')[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Navigate to the next image
+        var nextBtn = document.querySelector('.next');
+        nextBtn.onclick = function() {
+            currentIndex = (currentIndex + 1) % images.length;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+
+        // Navigate to the previous image
+        var prevBtn = document.querySelector('.prev');
+        prevBtn.onclick = function() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            display: block;
+            width: 80%;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: 15px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            color: #fff;
+            font-size: 50px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            user-select: none;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 15px;
+        }
+
+        .next {
+            right: 15px;
+        }
+
+        @media (max-width: 768px) {
+            nav h1 {
+                font-size: 1.5rem;
+            }
+
+            .nav-btn {
+                font-size: 30px;
+            }
+
+            #caption {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav h1 {
+                font-size: 1.2rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+
+            .nav-btn {
+                font-size: 25px;
+            }
+
+            .close {
+                font-size: 30px;
+            }
+
+            #caption {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>CARS GALLERY</h1>
+    </nav>
+    
+    <div class="gallery">
+        <div class="image-container">
+            <img src="https://img.freepik.com/premium-photo/3d-rendering-brandless-generic-concept-car-with-neon-lights-captivating-image-car-engulfed-tunnel-ai-generated_585735-3535.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://images.pexels.com/photos/3972755/pexels-photo-3972755.jpeg?cs=srgb&dl=pexels-garvin-st-villier-719266-3972755.jpg&fm=jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://www.carbike360.com/_next/image?url=https%3A%2F%2Fd2uqhpl0gyo7mc.cloudfront.net%2Fsmall_Ferrari_SF_90_S_Tradale_0dbf90419e.jpg&w=3840&q=75" >
+        </div>
+        <div class="image-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTQyGyZvRvMP5AshS-H3Y77jnfKHlYh7Izde5s_N4vQ_FQjubqaFPrPSjUJK1Ht1haAg0&usqp=CAU" >
+        </div>
+        <div class="image-container">
+            <img src="https://img.etimg.com/thumb/msid-73761505,width-480,height-360,imgsize-134975,resizemode-75/lamborghini-huracan-evo-price-at-rs-3-22-crore.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://file.kelleybluebookimages.com/kbb/base/house/2023/2023-Lamborghini-Huracan-FrontSide_LBHUREVOSPY2301_640x480.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://media.istockphoto.com/id/1435226078/photo/front-of-a-white-bmw-m4-parked-on-a-street-with-trees-in-the-background.jpg?s=612x612&w=0&k=20&c=l1IupUrh-_Zbcse-hDkaUAh-qMD82hJspXjnN0IBZlg=" >
+        </div>
+        <div class="image-container">
+            <img src="https://t3.ftcdn.net/jpg/04/35/92/40/360_F_435924070_A2n5ZyQUF7nCRsYZj6SX1SAYOn5sggFh.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://img.freepik.com/free-photo/colorful-car-with-blue-yellow-paint-job_1340-45385.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1722556800&semt=ais_hybrid" >
+        </div>
+        <div class="image-container">
+            <img src="https://cdn.pixabay.com/photo/2023/02/07/17/49/supercar-7774683_640.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/026/950/017/small_2x/futuristic-sports-car-ai-generative-photo.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://external-preview.redd.it/deliveries-of-fully-electric-bmw-vehicles-double-once-again-v0-K5NXmGjBlZT6Kh0rpwUCvtFu0pkuVGD3FJcGZaVVqJg.jpg?width=1080&crop=smart&auto=webp&s=38df3785771c01095438c4d04e346c8ada0ec16d" >
+        </div>
+        <!-- Add more images as needed -->
+    </div>
+
+    <!-- Modal for large image view -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+        <a class="prev nav-btn">&#10094;</a>
+        <a class="next nav-btn">&#10095;</a>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('modal');
+
+        // Get the image and insert it inside the modal
+        var images = document.querySelectorAll('.image-container img');
+        var modalImg = document.getElementById('modal-img');
+        var captionText = document.getElementById('caption');
+        var currentIndex;
+
+        images.forEach(function(image, index) {
+            image.addEventListener('click', function() {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+                currentIndex = index;
+            });
+        });
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('close')[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // Navigation for next/prev image
+        var prevBtn = document.querySelector('.prev');
+        var nextBtn = document.querySelector('.next');
+
+        prevBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            modalImg.src = images[currentIndex].src;
+        });
+
+        nextBtn.addEventListener('click', function() {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            modalImg.src = images[currentIndex].src;
+        });
+    </script>
+</body>
+</html>

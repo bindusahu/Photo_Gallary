@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .modal-content {
+            display: block;
+            width: 80%;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: 15px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            color: #fff;
+            font-size: 50px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            user-select: none;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .prev {
+            left: 15px;
+        }
+
+        .next {
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>CRICKETERS  GALLERY</h1>
+    </nav>
+    
+    <div class="gallery">
+        <div class="image-container">
+            <img src="https://www.prabhatkhabar.com/wp-content/uploads/2024/01/virat-kohli.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://feeds.abplive.com/onecms/images/uploaded-images/2022/05/12/1411a171415a3af125c19854cb5d6c93_original.jpg?impolicy=abp_cdn&imwidth=1200" >
+        </div>
+        <div class="image-container">
+            <img src="https://img.naidunia.com/naidunia/ndnimg/19052024/19_05_2024-_ms_dhoni_retirement.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://bsmedia.business-standard.com/_media/bs/img/article/2022-03/15/full/1647365891-7103.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://images.indianexpress.com/2023/11/Shubman-Gill-7.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://media.istockphoto.com/id/1320338921/photo/female-cricket-player-hitting-the-ball-with-her-bat.jpg?s=612x612&w=0&k=20&c=5VEBlswvR7TPA9th4EUSl0Y8dN47BkjsijPW0b_a9og=" >
+        </div>
+        <div class="image-container">
+            <img src="https://imgeng.jagran.com/images/2023/nov/Mohd%20SIR1700129332905.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://images.news18.com/ibnlive/uploads/2024/04/ipl-2024_mi-vs-csk_matheesha-pathirana-2024-04-9d09e924adc7e9c77e8a068ea86f3721.jpg?impolicy=website&width=640&height=480" >
+        </div>
+        <div class="image-container">
+            <img src="https://c.ndtvimg.com/2024-04/b0l6in_hardik-pandya-training-bcci_625x300_02_April_24.jpg?im=FeatureCrop,algorithm=dnn,width=806,height=605" >
+        </div>
+        <div class="image-container">
+            <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202404/lucknow-captain-kl-rahul-in-action-in-ipl-2024-ap-021242357-1x1_0.jpg?VersionId=fSuJEMRkOZBlBssEk2BPQBPe7zK_A_Y4" >
+        </div>
+        <div class="image-container">
+            <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202209/RTSBF2BH_0_x.png?VersionId=rFYXBVHKiy1jczTyzCn.nb1CT2pkRqR9" >
+        </div>
+        <div class="image-container">
+            <img src="https://i.guim.co.uk/img/media/340c68275ff9ce31f0dbc6d3474e75979aadf244/0_0_2572_1543/master/2572.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=04f6dfcbcaf1827c8b11d5cec59f3197" >
+        </div>
+        <!-- Add more images as needed -->
+    </div>
+
+    <!-- Modal for large image view -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+        <a class="prev nav-btn">&#10094;</a>
+        <a class="next nav-btn">&#10095;</a>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('modal');
+
+        // Get all images and setup variables
+        var images = document.querySelectorAll('.image-container img');
+        var modalImg = document.getElementById('modal-img');
+        var captionText = document.getElementById('caption');
+        var currentIndex;
+
+        // Open modal and display the clicked image
+        images.forEach(function(image, index) {
+            image.onclick = function() {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+                currentIndex = index;
+            };
+        });
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('close')[0];
+
+        // Close the modal when the close button is clicked
+        span.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        // Close the modal when clicking outside of the modal content
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Navigate to the previous image
+        document.querySelector('.prev').onclick = function() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+
+        // Navigate to the next image
+        document.querySelector('.next').onclick = function() {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+    </script>
+</body>
+</html>

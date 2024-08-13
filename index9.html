@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        nav {
+            background: #333;
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 0;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #caption {
+            margin: 15px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .next, .back {
+            position: absolute;
+            top: 50%;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            transform: translateY(-50%);
+            z-index: 1001;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .back {
+            left: 20px;
+        }
+
+        .next:hover, .back:hover {
+            color: #bbb;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>SUNSET GALLERY</h1>
+    </nav>
+    
+    <div class="gallery">
+        <div class="image-container">
+            <img src="https://t4.ftcdn.net/jpg/00/67/24/59/360_F_67245954_ejVa8C414CwJ9X0UadIFu1QEUjeLuFnO.jpg">
+        </div>
+        <div class="image-container">
+            <img src="https://media.istockphoto.com/id/538449165/photo/beautiful-cloudscape-over-the-sea-sunset-shot.jpg?s=612x612&w=0&k=20&c=XwieRIV5Df3Azuk8tH3CnAlLA-GO5GBE7R7dKtb1POw=" >
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/020/986/803/small/sunset-over-the-sea-photo.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://c4.wallpaperflare.com/wallpaper/754/37/218/sunset-plant-silhouette-nature-silhouette-photography-of-flower-and-sun-wallpaper-preview.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://i2.pickpik.com/photos/839/195/607/east-sun-flowers-red-preview.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://cdn.pixabay.com/photo/2022/05/23/11/26/tree-7215935_1280.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://t4.ftcdn.net/jpg/01/09/28/13/360_F_109281358_sQdCFHIv7LXkaw1LKh7qDrdNSWJ7KmH2.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://loveandroad.com/wp-content/gallery/angkor-wat-post/best-way-to-visit-Angkor-Wat-sunrise-1.jpg">
+        </div>
+        <div class="image-container">
+            <img src="https://st3.depositphotos.com/11124864/31749/i/450/depositphotos_317495306-stock-photo-the-golden-buddha-statue-of.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/027/104/880/small_2x/silhouetted-african-wild-animals-at-sunset-photo.jpg" >
+        </div>
+        <div class="image-container">
+            <img src="https://media.istockphoto.com/id/532389864/photo/african-sunset-with-silhouette.jpg?s=612x612&w=0&k=20&c=nmFIJps6CklhZiydCU8lhGZFkMUOHvQ15KmBjViT49w=" >
+        </div>
+        <div class="image-container">
+            <img src="https://media.istockphoto.com/id/1207032667/photo/giraffes-and-sunset-in-tsavo-east-and-tsavo-west-national-park-in-kenya.webp?b=1&s=170667a&w=0&k=20&c=iCwe24zZtUghR8WPsYxpxqoJpaZSW9kEpCHnSaBSgPE=">
+        </div>
+        <!-- Add more images as needed -->
+    </div>
+
+    <!-- Modal for large image view -->
+    <div id="modal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-img">
+        <div id="caption"></div>
+        <div class="back">&larr;</div>
+        <div class="next">&rarr;</div>
+    </div>
+
+    <script>
+        var modal = document.getElementById('modal');
+        var images = document.querySelectorAll('.image-container img');
+        var modalImg = document.getElementById('modal-img');
+        var captionText = document.getElementById('caption');
+        var currentIndex = 0;
+
+        images.forEach(function(image, index) {
+            image.onclick = function() {
+                modal.style.display = 'flex';
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+                currentIndex = index;
+            };
+        });
+
+        var span = document.getElementsByClassName('close')[0];
+        span.onclick = function() {
+            modal.style.display = 'none';
+        };
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        var nextButton = document.getElementsByClassName('next')[0];
+        nextButton.onclick = function() {
+            currentIndex = (currentIndex + 1) % images.length;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+
+        var backButton = document.getElementsByClassName('back')[0];
+        backButton.onclick = function() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            modalImg.src = images[currentIndex].src;
+            captionText.innerHTML = images[currentIndex].alt;
+        };
+    </script>
+</body>
+</html>
